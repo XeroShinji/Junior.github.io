@@ -1,12 +1,144 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Page Title</title>
-        <link rel="stylesheet" href="style.css">>
-    </head>
-    <body>
-       <script src="main.js"></script>
-        <canvas></canvas>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styling.css" />
+
+    <title>UTO² Vs Bot</title>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ====== Fontawesome CDN Link ====== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+    <!-- ====== CSS ====== -->
+    <link rel="stylesheet" href="style.css">
+
+    <title>Toast Notification with Progress Bar </title>
+    
+    
+</head>
+
+<body>
+    <div id="app">
+        <div class="summary">
+        <center><h2 class="title">PILI LANG MGA SUKI</h2>
+        <h1>RULES:PAG TALO</h1>
+        </center>  
+           <center><h1 class="tittle">Pitik Bulag</h1></center>
+            <br />
+           <center><h2 id="inGame"></h2></center> 
+            <center><h3 id="result"></h3></center>
+        </div>
+        <button>
+       <center><div class="games">
+            <div class="option" onclick="pickOption('🖐')">🖐</div>
+            <div class="option" onclick="pickOption('✌')">✌</div>
+            <div class="option" onclick="pickOption('✊')">✊</div>
+            </center>
+        </div>
+    </div></button>
+
+    <script>
+        class Start {
+            constructor() {
+                this.playerName = "Player"
+                this.botName = "COMPUTER"
+                this.playerOption;
+                this.botOption;
+                this.winner = ""
+            }
+
+            get getBotOption() {
+                return this.botOption;
+            }
+
+            set setBotOption(option) {
+                this.botOption = option;
+            }
+
+            get getPlayerOption() {
+                return this.playerOption
+            }
+
+            set setPlayerOption(option) {
+                this.playerOption = option;
+            }
+
+            botBrain() {
+               const option = ["🖐", "✌", "✊"];
+               const bot = option[Math.floor(Math.random() * option.length)];
+                return bot;
+            }
+
+            winCalculation() {
+                if (this.botOption == "🖐" && this.playerOption == "✌") {
+                    return this.winner = this.playerName
+                } else if (this.botOption == "🖐" && this.playerOption == "✊") {
+                    return this.winner = this.botName;
+                } else if (this.botOption == "✌" && this.playerOption == "🖐") {
+                    return this.winner = this.botName;
+                } else if (this.botOption == "✌" && this.playerOption == "✊") {
+                    return this.winner = this.playerName
+                } else if (this.botOption == "✊" && this.playerOption == "🖐") {
+                    return this.winner = this.playerName
+                } else if (this.botOption == "✊" && this.playerOption == "✌") {
+                    return this.winner = this.botName;
+                } else {
+                    return this.winner ="Tie no"
+                }
+            }
+
+            matchResult() {
+                if (this.winner != "tie") {
+                    return `${this.winner} win!`;
+                } else {
+                    return `WAAA ${this.winner}, TOLOL 🤪`;
+                }
+            }
+        }
+
+        function pickOption(params) {
+            const start = new Start();
+            start.setPlayerOption = params;
+            start.setBotOption = start.botBrain();
+            start.winCalculation();
+
+            const inGame = document.getElementById("inGame");
+            const result = document.getElementById("result");
+
+            inGame.textContent = "..."
+            result.textContent = "..."
+
+            setTimeout(() => {
+                inGame.textContent = `${start.getPlayerOption} VS ${start.getBotOption}`
+                result.textContent = start.matchResult();
+            }, 5000);
+
+        }
+    </script>
+
+<div class="toast">
+        <div class="toast-content">
+            <i class="fas fa-solid fa-check check"></i>
+
+            <div class="message">
+                <span class="text text-1">Sabar</span>
+                <span class="text text-2">BOT SEDANG MIKIR</span>
+            </div>
+        </div>
         
-    </body>
+        <i class="fa-solid fa-xmark close"></i>
+
+        <div class="progress"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
 </html>
